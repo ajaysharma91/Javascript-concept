@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Cookies</title>
+    <script>
+        function setCustomCookies(){
+            const cookies = new Map();
+            Object.defineProperty(document,"myCookies",{
+                configurable:true,
+                set(val){
+                    const {key, value, options} = getSplitValues(val);
+                    console.log(key, value, options)
+                    let expiry = Infinity;
+                    if(options['max-age']){
+                        expiry = Date.now() + options["max-age"] * 1000;
+                    }
+                    cookies.set(key,{value,expiry})
+                },
+                get(){
+                    const time = Date.now();
+                    const cookie =[];
+                    for(let [key,{value,expiry}] of cookies){
+                        if(time > expiry) {
+                            cookies.delete(key)
+                        }else {
+                            cookie.push(`${key}=${value}`)
+                        }
+                    }
+                    return cookie.join("; ");
+                }
+            })
+            function getSplitValues(val){
+                const [keyValue,...rest] = val.split(";");
+                const [key,value] = seprateKeyValueString(keyValue);
+                const options = {}
+                for(let keyV of rest){
+                   const [key,value] =  seprateKeyValueString(keyV);
+                    options[key] = value;
+                }
+                return {key, value, options}
+            }
+            function seprateKeyValueString(keyVal){
+                return keyVal.split("=").map(val=>val.trim())
+
+            }
+
+        }
+        setCustomCookies()
+        document.myCookies = "name=rahul;max-age=1";
+        document.cookie = "name1=ajay;max-age=1";
+        document.cookie = "myname=sharma";
+        document.cookie = "myname1=sharma1";
+        console.log(document.cookie);
+        console.log(document.myCookies);
+        setTimeout(function(){
+            console.log(document.cookie)
+            console.log(document.myCookies)
+        },2000)
+    </script>
+</head>
+<body>
+    <h1>Hello Custom Cookies here</h1>
+</body>
+</html>
