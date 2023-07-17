@@ -10,9 +10,15 @@
     <!-- <script src="./color-computed.js" defer></script> -->
     <!-- <script src="./api-call-with-timeout.js" defer></script> -->
     <!-- <script src="./method-chaining.js" defer></script> -->
-    <script src="./set-object-value-from-string.js" defer></script>
+    <script src="./curry4.js" defer></script>
 </head>
 <body>
+  <form id="parent">
+    <input type="text" name="foo.bat" value="1"/>
+    <input type="text" name="foo.bar.baz" value="2" />
+    <input type="text" name="foo.bar.twenty" value="20" />
+    <input type="text" name="fizz" value="3"/>
+  </form>
     <!-- <div class="card-container" id="container">
         <div class="card" style="color: red;">This is card 1</div>
         <div class="card" style="color: #ff0;">This is card 2</div>
@@ -52,7 +58,7 @@
         <div class="c" id="c-3"/>
       </div>
     </div> -->
-    <div id="root">
+    <!-- <div id="root">
         <article>Prepare for javascript</article>
         <section>
             on
@@ -65,7 +71,7 @@
                 </span>
             </p>
         </section>
-    </div>
+    </div> -->
 
     <!-- <main>
         <input type="text" placeholder="Enter Your query" id="search"/>

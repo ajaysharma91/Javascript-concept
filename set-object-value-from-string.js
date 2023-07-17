@@ -25,7 +25,5 @@ const setValue = (obj,path,value)=>{
     return obj;
 }
 
-
-
 console.log(setValue({},'a[0].b.c',5))
 console.log(setValue({},[x,0,s,d],3))
